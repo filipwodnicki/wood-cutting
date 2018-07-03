@@ -1,6 +1,7 @@
 from unittest import TestCase
 
-from woodcut import Board
+from dev.woodcut import Board
+
 
 
 class TestBoard(TestCase):
