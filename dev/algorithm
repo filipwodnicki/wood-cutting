@@ -1,0 +1,33 @@
+from dev.board import Board
+
+boardCollection = []
+
+pieces = [450, 444, 436, 430, 389, 389, 386, 375, 362, 362, 261, 261, 261]
+
+
+# Algorithm
+
+boardCollection.append(Board())
+
+pieces.sort(reverse=True)  # sort in ascending order
+
+
+def try_placing(piece):
+    for board in boardCollection:
+        if board.space_remaining >= piece:
+            board.insert(piece)
+            pieces.remove(piece)
+            return True
+    return False
+
+
+for piece in pieces[:]: #pieces[:] is a copy for the purposes of the algorithm, otherwise our pieces[] would get modified
+
+    #     print ( boardCollection[0].contents )
+
+    if try_placing(piece) == True:
+        pass
+    else:
+        boardCollection.append(Board())
+        boardCollection[-1].insert(piece)
+        pieces.remove(piece)
