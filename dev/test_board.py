@@ -5,13 +5,15 @@ from dev.woodcut import Board
 
 class TestBoard(TestCase):
 
-    def test_insert_type(self):
+    #test "insert" Class method
+
+    def test_insert_type(self): # assert type != string
 
         b = Board()
 
         self.assertRaises(Exception, b.insert, 'car')
 
-    def test_insert_size(self):
+    def test_insert_size(self): #assert can't insert something big. (max board size = 2050)
 
         b = Board()
 
@@ -24,7 +26,7 @@ class TestBoard(TestCase):
 
         self.assertRaises(Exception, b2.insert, 2051)
 
-    def test_insert_space(self):
+    def test_insert_space(self): # assert space remaining works as planned
         b = Board()
 
         b.insert(100)
@@ -35,15 +37,21 @@ class TestBoard(TestCase):
 
         self.assertEqual(b.space_remaining, 1100)
 
+    # test "remove" Class method
+
     def test_remove(self):
 
         b = Board()
         b.insert(50)
 
+        # assert can't remove something that doesn't exist
         self.assertRaises(Exception, b.remove, 100)
+        # assert space remaining works correctly
         self.assertEquals(b.space_remaining, 2000)
 
         b.remove(50)
 
+        # assert can't remove something that was recently removed
         self.assertRaises(Exception, b.remove, 50)
+        # assert space remaining works correctly
         self.assertEquals(b.space_remaining, 2050)
