@@ -7,11 +7,24 @@ class TestBoard(TestCase):
 
     #test "insert" Class method
 
-    def test_insert_type(self): # assert type != string
+    def test_insert_type(self):
 
         b = Board()
 
-        self.assertRaises(Exception, b.insert, 'car')
+        self.assertRaises(Exception, b.insert, 'car') # assert string fails
+
+        self.assertRaises(Exception, b.insert, [0,1,2] ) # assert [] fails
+
+        try:
+            b.insert(100) # assert int OK
+        except TypeError:
+            self.fail("insert() raised TypeError unexpectedly!")
+
+        try:
+            b.insert(100.0) # assert float OK
+        except TypeError:
+            self.fail("insert() raised TypeError unexpectedly!")
+
 
     def test_insert_size(self): #assert can't insert something big. (max board size = 2050)
 
